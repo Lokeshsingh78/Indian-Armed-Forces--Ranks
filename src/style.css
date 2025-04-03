@@ -1,0 +1,391 @@
+
+:root {
+    --army-color: #2c4d22;
+    --airforce-color: #185e9a;
+    --navy-color: #292f5a;    ;
+    --army-accent: #d4af37;
+    --airforce-accent: #64b5f6;
+    --navy-accent: #b3d1ff;
+}
+#mainLogo {
+    width: 180px;
+    height: auto;
+    max-height: 180px;
+}
+.force-logo img {
+    width: 40px;
+    height: auto;
+    max-height: 40px;
+}
+.force-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    font-size: 16px;
+    width: auto;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #d6d6d6;
+    color: #333;
+    line-height: 1.6;
+}
+header {
+    background: linear-gradient(to right, var(--army-color), var(--airforce-color), var(--navy-color));
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+header p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.forces-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 1.5rem 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.force-btn {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.force-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+.force-btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.army-btn {
+    background-color: var(--army-color);
+}
+.airforce-btn {
+    background-color: var(--airforce-color);
+}
+.navy-btn {
+    background-color: var(--navy-color);
+}
+.army-btn.active {
+    background-color: var(--army-color);
+    border: 2px solid var(--army-accent);
+}
+.airforce-btn.active {
+    background-color: var(--airforce-color);
+    border: 2px solid var(--airforce-accent);
+}
+.navy-btn.active {
+    background-color: var(--navy-color);
+    border: 2px solid var(--navy-accent);
+}
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.ranks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.rank-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.rank-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.rank-header {
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+.army-rank .rank-header {
+    background-color: var(--army-color);
+}
+.airforce-rank .rank-header {
+    background-color: var(--airforce-color);
+}
+.navy-rank .rank-header {
+    background-color: var(--navy-color);
+}
+.insignia-img {
+    height: 80px;
+    margin-bottom: 1rem;
+    display: block;
+    margin: 0 auto 1rem;
+}
+.rank-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.rank-body {
+    padding: 1.5rem;
+}
+.rank-details {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+.view-more-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.view-more-btn:hover {
+    background-color: #e0e0e0;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.modal {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(50px);
+    transition: all 0.4s ease;
+}
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+.modal-header {
+    padding: 1.5rem 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.army-modal .modal-header {
+    background-color: var(--army-color);
+    color: white;
+}
+.airforce-modal .modal-header {
+    background-color: var(--airforce-color);
+    color: white;
+}
+.navy-modal .modal-header {
+    background-color: var(--navy-color);
+    color: white;
+}
+.modal-title {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+.modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.modal-body {
+    padding: 2rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.modal-section {
+    margin-bottom: 2rem;
+}
+.modal-section-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+}
+.responsibilities {
+    list-style-position: inside;
+    margin-left: 1rem;
+}
+.responsibilities li {
+    margin-bottom: 0.5rem;
+}
+.modal-footer {
+    padding: 1.5rem 2rem;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+}
+.rank-navigation-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    color: white;
+}
+.army-modal .rank-navigation-btn {
+    background-color: var(--army-color);
+}
+.airforce-modal .rank-navigation-btn {
+    background-color: var(--airforce-color);
+}
+.navy-modal .rank-navigation-btn {
+    background-color: var(--navy-color);
+}
+.rank-navigation-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+.rank-navigation-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+.force-icon {
+    width: 24px;
+    height: 24px;
+}
+.modal-insignia {
+    height: 100px;
+}
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .forces-nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 1rem;
+    }
+    .force-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .ranks-container {
+        grid-template-columns: 1fr;
+    }
+    .modal {
+        width: 95%;
+    }
+    .modal-title {
+        font-size: 1.5rem;
+    }
+    .modal-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .rank-navigation-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.main-footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-align: center;
+}
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.footer-logo {
+    width: 30px;
+    height: auto;
+    opacity: 0.9;
+}
+.footer-container p {
+    margin: 2px 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff9800, #f44336, #3f51b5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 3px rgba(255, 152, 0, 0.8); }
+    100% { text-shadow: 0 0 6px rgba(244, 67, 54, 0.8); }
+}
