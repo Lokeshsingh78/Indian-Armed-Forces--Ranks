@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Indian-Armed-Forces--Ranks/static/css/main.740ff568.css",
+    "main.js": "/Indian-Armed-Forces--Ranks/static/js/main.0f2509d5.js",
+    "index.html": "/Indian-Armed-Forces--Ranks/index.html",
+    "main.740ff568.css.map": "/Indian-Armed-Forces--Ranks/static/css/main.740ff568.css.map",
+    "main.0f2509d5.js.map": "/Indian-Armed-Forces--Ranks/static/js/main.0f2509d5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.740ff568.css",
+    "static/js/main.0f2509d5.js"
+  ]
+}
