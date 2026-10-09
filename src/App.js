@@ -92,6 +92,17 @@ const rankAliases = {
   "adg": ["Additional Director General"]
 };
 
+const forceNames = {
+  army: "Indian Army",
+  airforce: "Indian Air Force",
+  navy: "Indian Navy",
+  police: "Indian Police",
+  coastguard: "Coast Guard",
+  capf: "CAPF (CRPF/BSF)"
+};
+
+const forceKeys = ['army', 'airforce', 'navy', 'police', 'coastguard', 'capf'];
+
 function App() {
   const [currentForce, setCurrentForce] = useState('army');
   const [currentRankIndex, setCurrentRankIndex] = useState(0);
@@ -100,17 +111,6 @@ function App() {
   const [searchFilterForce, setSearchFilterForce] = useState('all');
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const searchInputRef = useRef(null);
-
-  const forceNames = {
-    army: "Indian Army",
-    airforce: "Indian Air Force",
-    navy: "Indian Navy",
-    police: "Indian Police",
-    coastguard: "Coast Guard",
-    capf: "CAPF (CRPF/BSF)"
-  };
-
-  const forceKeys = ['army', 'airforce', 'navy', 'police', 'coastguard', 'capf'];
 
   // Universal Search across all forces with relevance scoring
   const allSearchResults = useMemo(() => {
@@ -264,24 +264,27 @@ function App() {
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (modalActive) {
-      if (e.key === 'Escape') {
-        closeModal();
-      } else if (e.key === 'ArrowLeft') {
-        showPreviousRank();
-      } else if (e.key === 'ArrowRight') {
-        showNextRank();
-      }
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!modalActive) return;
+
+      if (e.key === 'Escape') {
+        setModalActive(false);
+      } else if (e.key === 'ArrowLeft' && currentRankIndex > 0) {
+        setCurrentRankIndex((index) => index - 1);
+      } else if (e.key === 'ArrowRight') {
+        const list = ranksData[currentForce] || [];
+        if (currentRankIndex < list.length - 1) {
+          setCurrentRankIndex((index) => index + 1);
+        }
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [modalActive, currentRankIndex]);
+  }, [modalActive, currentRankIndex, currentForce]);
 
   const scrollToRanks = (e) => {
     if (e && e.preventDefault) e.preventDefault();
