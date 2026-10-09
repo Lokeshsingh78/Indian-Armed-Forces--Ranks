@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import './App.css';
 import { ranksData } from './data/forcesData';
 
@@ -98,6 +98,8 @@ function App() {
   const [modalActive, setModalActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchFilterForce, setSearchFilterForce] = useState('all');
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const searchInputRef = useRef(null);
 
   const forceNames = {
     army: "Indian Army",
@@ -337,9 +339,9 @@ function App() {
         </div>
 
         {/* Search Bar in Ekdum Top-Right of Header */}
-        <div className="header-top-search">
-          <span className="top-search-icon">🔍</span>
-          <input 
+        <div className={`header-top-search ${mobileSearchOpen ? 'mobile-search-open' : ''}`}>
+          <button type="button" className="top-search-toggle" aria-label={mobileSearchOpen ? 'Close search' : 'Open search'} aria-expanded={mobileSearchOpen} onClick={() => { setMobileSearchOpen((isOpen) => !isOpen); if (!mobileSearchOpen) setTimeout(() => searchInputRef.current?.focus(), 0); }}><svg className="top-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 5 5" /></svg></button>
+          <input ref={searchInputRef} 
             type="text" 
             className="top-search-input" 
             placeholder="Search all ranks..." 
@@ -351,6 +353,7 @@ function App() {
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
                 setSearchQuery('');
+                setMobileSearchOpen(false);
               }
             }}
           />
